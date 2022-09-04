@@ -1,0 +1,253 @@
+---
+title: "Analysis of Fossil Fuels"
+author: "Kumar Vatsal"
+date: "2022-09-04"
+categories: [information]
+image: "image.jpg"
+---
+
+## Aims
+
+- To find out the top 10 producers of different fossil fuels.
+- To find out which countries have the highest reserves of each of the given fossil fuels.
+- Try to find that does there exist a relationship between the total reserves of the fuel and the production.
+
+## INTRODUCTION
+
+Fossil fuels have been our main source of energy for quite a lot of time now, but with the increase in global warming, and the depletion of fossil fuels, many energy giants are shifting from fossil fuels to renewable energy sources. But, there is still a lot of time since we can rely totally on the renewable sources of energy.
+
+In the following analysis, we'll look at the top producers of the fossil fuels and also look at the countries which have the highest reserves of each of the fossil fuel.
+
+It is expected that the country that has more reserves will produce more of that fossil fuel to generate maximum profit. We'll look into this and try to analyse the factors that may affect this statement.
+
+
+
+
+## Analysis
+
+
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE
+)
+```
+
+
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+library(tidyverse)
+library(plotly)
+library(ggthemes)
+library(ggpubr)
+```
+
+
+```{r echo=FALSE,warning=FALSE}
+resources <- read_csv(here::here("natural-resources.csv"), show_col_types = FALSE)
+
+data1 <- resources %>%
+  select(`Entity`,`Year`,`Gas production`,`Coal production`,`Oil production`,`Gas reserves`,`Oil reserves`,`Coal reserves`,`Population`)
+
+```
+
+
+
+```{r}
+data_prod_oil <- data1 %>% 
+  group_by(Entity) %>% 
+  summarise(avg_oil = mean(`Oil production`, na.rm = TRUE)) %>% 
+  arrange(desc(avg_oil)) %>% filter(Entity != "World" ) %>% 
+  filter(Entity != "Former U.S.S.R.") %>% head(10)
+```
+
+
+```{r}
+data_prod_gas <- data1 %>% 
+  group_by(Entity) %>% 
+  summarise(avg_gas = mean(`Gas production`, na.rm = TRUE)) %>% 
+  arrange(desc(avg_gas)) %>% filter(Entity != "World" ) %>% 
+  filter(Entity != "Former U.S.S.R.") %>% head(10)
+```
+
+
+
+```{r}
+data_prod_coal <- data1 %>% 
+  group_by(Entity) %>% 
+  summarise(avg_coal = mean(`Coal production`, na.rm = TRUE)) %>% 
+  arrange(desc(avg_coal)) %>% filter(Entity != "World" ) %>% 
+  filter(Entity != "Former U.S.S.R.") %>% head(10)
+```
+
+
+
+```{r}
+p1 <- ggplot(data_prod_oil,aes(y= fct_reorder(Entity,avg_oil),
+                               x = avg_oil/1000000)) + 
+  geom_col() +
+  theme_dark() +
+ 
+  labs(x = "Average Oil Production(in Million Cubic Meter)",
+y = "Country") +
+  
+  geom_text(aes(label=round((avg_oil/1000000),2),position="stack",vjust=1))
+
+```
+
+
+
+```{r}
+p2 <- ggplot(data_prod_gas,aes(y= fct_reorder(Entity,avg_gas),
+                               x = avg_gas/1000000000)) + 
+  geom_col() +
+  theme_dark() +
+  
+  labs(x = "Average Gas Production(In Billion Cubic Meter)",
+y = "Country" ) +
+  geom_text(aes(label=round((avg_gas/1000000000),2),vjust=1))
+
+
+```
+
+
+```{r}
+p3 <- ggplot(data_prod_coal,aes(y= fct_reorder(Entity,avg_coal),
+                               x = avg_coal/1000000)) + 
+  geom_col() +
+  theme_dark() +
+  labs(x ="Average coal Production(In Million Tonnes)",
+y =  "Country" ) +
+  geom_text(aes(label=round((avg_coal/1000000),2),vjust=1))
+
+
+
+```
+
+
+
+
+```{r}
+data_res_oil <- data1 %>% 
+  group_by(Entity) %>% 
+  summarise(avg_oil_res = mean(`Oil reserves`, na.rm = TRUE)) %>% 
+  arrange(desc(avg_oil_res)) %>% filter(Entity != "World" ) %>% 
+  filter(Entity != "Former U.S.S.R.") %>% head(10)
+```
+
+
+
+
+```{r}
+data_res_gas <- data1 %>% 
+  group_by(Entity) %>% 
+  summarise(avg_gas_res = mean(`Gas reserves`, na.rm = TRUE)) %>% 
+  arrange(desc(avg_gas_res)) %>% filter(Entity != "World" ) %>% 
+  filter(Entity != "Former U.S.S.R.") %>% head(10)
+```
+
+```{r}
+data_res_coal <- data1 %>% 
+  group_by(Entity) %>% 
+  summarise(avg_coal_res = mean(`Coal reserves`, na.rm = TRUE)) %>% 
+  arrange(desc(avg_coal_res)) %>% filter(Entity != "World" ) %>% 
+  filter(Entity != "Former U.S.S.R.") %>% head(10)
+```
+
+
+
+```{r}
+p4 <- ggplot(data_res_oil,aes(y= fct_reorder(Entity,avg_oil_res),
+                               x = avg_oil_res/1000000)) + 
+  geom_col() +
+  theme_dark() +
+  labs(x =" Oil Reserves (In Million Cubic Meter)",
+y =  "Country" ) +
+  geom_text(aes(label=round((avg_oil_res/1000000),2),vjust=1,hjust = 1))
+
+
+```
+
+
+```{r}
+p5 <- ggplot(data_res_gas,aes(y= fct_reorder(Entity,avg_gas_res),
+                               x = avg_gas_res/1000000000)) + 
+  geom_col() +
+  theme_dark() +
+  labs(x =" Gas Reserves (In Billion Cubic Meter)",
+y =  "Country" ) +
+  geom_text(aes(label=round((avg_gas_res/1000000000),2),vjust=1,hjust = 1))
+
+```
+
+
+
+
+
+
+```{r}
+p6 <- ggplot(data_res_coal,aes(y= fct_reorder(Entity,avg_coal_res),
+                               x = avg_coal_res/1000000)) + 
+  geom_col() +
+  theme_dark() +
+  labs(x =" Coal Reserves (In Million Tonnes)",
+y =  "Country" ) +
+  geom_text(aes(label=round((avg_coal_res/1000000),2),vjust=1,hjust = 1))
+
+```
+## Top 10 Oil Producers of the world and Top countries with most Oil Reserves
+
+```{r fig.height=7}
+gridExtra::grid.arrange(p1,p4, nrow=2)
+```
+
+From the above graph it is evident that the country which has the most oil reserves has produced the most oil with some exceptions. The exception of Venezuela can be explained due to the fact that Venezuela has heavy oil which is tough to produce due to high viscosity and density. Also the political situation of Venezuela is also not favorable which makes it tougher for the foreign countries to work in Venezuela.
+
+Whereas, Arabic countries like UAE, Iraq, Iran, Kuwait has light, sweet oil which is very easy to extract, hence eventho they have lesser reserves than Venezuela, they are producing almost the same amount of crude oil as Venezuela.
+
+
+
+
+
+## Top 10 Gas Producers of the world and Top countries with most Gas Reserves
+
+```{r fig.height=7}
+gridExtra::grid.arrange(p2,p5, nrow=2)
+```
+
+From the above graph it is evident that most of the countries that have high reserves of natural gas produce more of it. The countreis which don't usually don't have the resources to do so. Natural gas is one of the major sources of energy for many countries like USA, it is mainly used for generation of electricity and heating.
+
+We also have to take into account the consumption and export of the natural resource into account.
+
+
+
+
+## Top 10 Coal Producers of the world and Top countries with most coal Reserves
+
+```{r fig.height=7}
+gridExtra::grid.arrange(p3,p6, nrow=2)
+```
+
+
+From the above graph, it is clearly evident that the production of coal can be related to the resources available as the countries producing more coal have more proven reserves of coal.
+
+
+
+## CONCLUSION
+
+With this blog, we were able to find the top fossil fuel producers of the world and we were also able to find that which countries have the highest proven resources of a given fossil fuel.
+
+From the above graph of different resources, it is evident that the countries which have higher amount of a particular fossil fuel, is usually a higher producer of the particular resource with few exceptions.
+But, we just cant take into account this one factor. There are many other factors that are needed to be taken into account like the import and export , consumption of the resource and many countries are bound by contracts (OPEC) which limits them to how much resource they can produce, this is done to maintain the prices of the comodity in the international market.
+
+
+
+
+
+
+
+
+
+
+
