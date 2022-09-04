@@ -14,11 +14,11 @@ image: "image.jpg"
 
 ## INTRODUCTION
 
-Fossil fuels have been our main source of energy for quite a lot of time now, but with the increase in global warming, and the depletion of fossil fuels, many energy giants are shifting from fossil fuels to renewable energy sources. But, there is still a lot of time since we can rely totally on the renewable sources of energy.
+##### Fossil fuels have been our main source of energy for quite a lot of time now, but with the increase in global warming, and the depletion of fossil fuels, many energy giants are shifting from fossil fuels to renewable energy sources. But, there is still a lot of time since we can rely totally on the renewable sources of energy.
 
-In the following analysis, we'll look at the top producers of the fossil fuels and also look at the countries which have the highest reserves of each of the fossil fuel.
+##### In the following analysis, we'll look at the top producers of the fossil fuels and also look at the countries which have the highest reserves of each of the fossil fuel.
 
-It is expected that the country that has more reserves will produce more of that fossil fuel to generate maximum profit. We'll look into this and try to analyse the factors that may affect this statement.
+##### It is expected that the country that has more reserves will produce more of that fossil fuel to generate maximum profit. We'll look into this and try to analyse the factors that may affect this statement.
 
 
 

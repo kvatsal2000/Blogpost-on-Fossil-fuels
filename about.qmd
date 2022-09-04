@@ -6,7 +6,7 @@ about:
   links:
     - icon: github
       text: Github
-      href: https://github.com/etc5523-2022
+      href: https://github.com/kvatsal2000
 
 ---
 
