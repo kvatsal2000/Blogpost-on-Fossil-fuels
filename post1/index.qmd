@@ -33,14 +33,6 @@ image: "image.jpg"
 
 
 
-
-
-
-
-
-
-
-
 ```{r echo=FALSE,warning=FALSE,message=FALSE}
 knitr::opts_chunk$set(
   echo = FALSE,
@@ -52,7 +44,6 @@ knitr::opts_chunk$set(
 
 ```{r echo=FALSE,warning=FALSE,message=FALSE}
 library(tidyverse)
-library(plotly)
 library(ggthemes)
 library(ggpubr)
 library(kableExtra)
@@ -98,18 +89,22 @@ data_prod_oil <- data1 %>%
 ```
 
 
+
+
+
 #### Top 10 oil producers of the world
 
-```{r oilprod}
+```{r tbl-oilprod}
 
 
-#| label: oilprod
-#| tbl-cap: "Top 10 oil producers of the world"
+#| label: tbl-oilprod
+#| tbl-cap: "Top 10 Oil producers of the world"
 
 data_prod_oil2 <- data_prod_oil %>% 
   mutate("Average oil production(in Million m^3)" = avg_oil/1000000) %>% 
-  select(-avg_oil) %>%  kable(caption = "Top 10 oil producers of the world")  %>%
- kable_material_dark()
+  select(-avg_oil) %>%
+  kable(caption = "Top 10 Oil producers of the world") %>%
+  kable_material_dark()
 
 data_prod_oil2
 ```
@@ -131,7 +126,13 @@ data_prod_gas <- data1 %>%
 
 ## Top 10 Natural Gas producers of the world
 
-```{r gasprod , fig.cap = "Top 10 Natural Gas producers of the world"}
+```{r tbl-gasprod}
+
+#| label: tbl-gasprod
+#| tbl-cap: "Top 10 natural gas producers of the world"
+
+
+
 data_prod_gas2 <- data_prod_gas %>% 
   mutate("Average gas production(in Billion m^3)" = round(avg_gas/1000000000,2)) %>% 
   select(-avg_gas) %>%  kable(caption = "Top 10 Natural Gas producers of the world")  %>%
@@ -164,10 +165,17 @@ data_prod_coal <- data1 %>%
 
 
 
-```{r coalprod, fig.cap = "Top 10 coal producers of the world"}
+```{r tbl-coalprod}
+
+#| label: tbl-coalprod
+#| tbl-cap: "Top 10 coal producers of the world"
+
+
+
 data_prod_coal2 <- data_prod_coal %>% 
   mutate("Average coal production(in Million Tonnes)" = avg_coal/1000000) %>% 
-  select(-avg_coal) %>%  kable(caption = "Top 10 coal producers of the world")  %>%
+  select(-avg_coal) %>% 
+  kable(caption = "Top 10 coal producers of the world")  %>%
   kable_material_dark()
 
 data_prod_coal2
@@ -290,13 +298,20 @@ y =  "Country" ) +
   geom_text(aes(label=round((avg_coal_res/1000000),2),vjust=1,hjust = 1))
 
 ```
+
+
 ## Top 10 Oil Producers of the world and Top countries with most Oil Reserves
 
-```{r oil,fig.height=7}
+
+```{r fig-oil,fig.height=7,fig.cap="Top 10 Oil Producers of the world and Top countries with most Oil Reserves"}
+
+#| label: fig-oil
+#| fig-cap: "Top 10 Oil Producers of the world and Top countries with most Oil Reserves"
+
 gridExtra::grid.arrange(p1,p4, nrow=2)
 ```
 
-From the above graph \@ref(fig:oil) it is evident that the country which has the most oil reserves has produced the most oil with some exceptions. The exception of Venezuela can be explained due to the fact that Venezuela has heavy oil which is tough to produce due to high viscosity and density. Also the political situation of Venezuela is also not favorable which makes it tougher for the foreign countries to work in Venezuela.
+From the above graph @fig-oil it is evident that the country which has the most oil reserves has produced the most oil with some exceptions. The exception of Venezuela can be explained due to the fact that Venezuela has heavy oil which is tough to produce due to high viscosity and density. Also the political situation of Venezuela is also not favorable which makes it tougher for the foreign countries to work in Venezuela.
 
 Whereas, Arabic countries like UAE, Iraq, Iran, Kuwait has light, sweet oil which is very easy to extract, hence eventho they have lesser reserves than Venezuela, they are producing almost the same amount of crude oil as Venezuela.
 
@@ -306,11 +321,15 @@ Whereas, Arabic countries like UAE, Iraq, Iran, Kuwait has light, sweet oil whic
 
 ## Top 10 Gas Producers of the world and Top countries with most Gas Reserves
 
-```{r gas,fig.height=7}
+```{r fig-gas,fig.height=7,fig.cap="Top 10 Natural Gas Producers of the world and Top countries with most Oil Reserves"}
+
+#| label: fig-gas
+#| fig-cap: "Top 10 Natural Gas Producers of the world and Top countries with most Oil Reserves"
+
 gridExtra::grid.arrange(p2,p5, nrow=2)
 ```
 
-From the above graph \@ref(fig:gas) it is evident that most of the countries that have high reserves of natural gas produce more of it. The countries which don't usually don't have the resources to do so. Natural gas is one of the major sources of energy for many countries like USA, it is mainly used for generation of electricity and heating.
+From the above graph @fig-gas it is evident that most of the countries that have high reserves of natural gas produce more of it. The countries which don't usually don't have the resources to do so. Natural gas is one of the major sources of energy for many countries like USA, it is mainly used for generation of electricity and heating.
 
 We also have to take into account the consumption and export of the natural resource into account.
 
@@ -319,23 +338,48 @@ We also have to take into account the consumption and export of the natural reso
 
 ## Top 10 Coal Producers of the world and Top countries with most coal Reserves
 
-```{r coal,fig.height=7}
+```{r fig-coal,fig.height=7,fig.cap="Top 10 Natural Gas Producers of the world and Top countries with most Oil Reserves"}
+
+
+#| label: fig-coal
+#| fig-cap: "Top 10 CoalProducers of the world and Top countries with most Oil Reserves"
+
+
 gridExtra::grid.arrange(p3,p6, nrow=2)
 ```
 
 
-From the above graph \@ref(fig:coal), it is clearly evident that the production of coal can be related to the resources available as the countries producing more coal have more proven reserves of coal.
+From the above graph @fig-coal , it is clearly evident that the production of coal can be related to the resources available as the countries producing more coal have more proven reserves of coal.
 
 
 
 ## CONCLUSION
 
-With this blog, we were able to find the top oil @tbl-oilprod, gas \@ref(tab:gasprod) and coal \@ref(tab:coalprod) producers of the world and we were also able to find that which countries have the highest proven resources of a given fossil fuel.
+With this blog, we were able to find the top oil @tbl-oilprod, gas  @tbl-gasprod and coal  @tbl-coalprod producers of the world and we were also able to find that which countries have the highest proven resources of a given fossil fuel.
 
 From the above graph of different resources, it is evident that the countries which have higher amount of a particular fossil fuel, is usually a higher producer of the particular resource with few exceptions.
 But, we just cant take into account this one factor. There are many other factors that are needed to be taken into account like the import and export , consumption of the resource and many countries are bound by contracts (OPEC) which limits them to how much resource they can produce, this is done to maintain the prices of the comodity in the international market.
 
 
+
+
+
+## REFERENCES
+
+- The data for the blog is downloaded from- [HERE](https://ourworldindata.org/explorers/natural-resources)
+Fossil Fuels Data Explorer. from Our World in Data website: https://ourworldindata.org/explorers/natural-resources
+
+- Forbes.com website: https://imageio.forbes.com/specials-images/imageserve/6032b4256206020803a724f7/Oil-pump-on-a-sunset-background--World-Oil-Industry/960x0.jpg?format=jpg&width=960
+
+-  Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, https://doi.org/10.21105/joss.01686.
+
+-  Zhu H (2021). _kableExtra: Construct Complex Table with 'kable' and Pipe Syntax_. R package version 1.3.4,
+  <https://CRAN.R-project.org/package=kableExtra>.
+  
+- Yihui Xie (2022). bookdown: Authoring Books and Technical Documents with R Markdown. R package version 0.26.
+
+  Yihui Xie (2016). bookdown: Authoring Books and Technical Documents with R Markdown. Chapman and Hall/CRC. ISBN 978-1138700109.
+  
 
 
 
