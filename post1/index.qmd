@@ -331,7 +331,7 @@ Whereas, Arabic countries like UAE, Iraq, Iran, Kuwait has light, sweet oil whic
 
 ## Top 10 Gas Producers of the world and Top countries with most Gas Reserves
 
-```{r fig-gas,fig.height=7,fig.cap="Top 10 Natural Gas Producers of the world and Top countries with most Oil Reserves"}
+```{r fig-gas,fig.height=7,fig.cap="Top 10 Natural Gas Producers of the world and Top countries with most Natural Gas Reserves"}
 
 #| label: fig-gas
 #| fig-cap: "Top 10 Natural Gas Producers of the world and Top countries with most Oil Reserves"
@@ -348,7 +348,7 @@ We also have to take into account the consumption and export of the natural reso
 
 ## Top 10 Coal Producers of the world and Top countries with most coal Reserves
 
-```{r fig-coal,fig.height=7,fig.cap="Top 10 Natural Gas Producers of the world and Top countries with most Oil Reserves"}
+```{r fig-coal,fig.height=7,fig.cap="Top 10 Coal Producers of the world and Top countries with most coal Reserves"}
 
 
 #| label: fig-coal
