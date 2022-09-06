@@ -73,6 +73,12 @@ resources <- read_csv(here::here("natural-resources.csv"), show_col_types = FALS
 data1 <- resources %>%
   select(`Entity`,`Year`,`Gas production`,`Coal production`,`Oil production`,`Gas reserves`,`Oil reserves`,`Coal reserves`,`Population`)
 
+
+data2 <- data1 %>% group_by(Entity) %>% summarise(avg_oil = mean(`Oil production`, na.rm = TRUE),avg_gas = mean(`Gas production`, na.rm = TRUE),avg_coal = mean(`Coal production`, na.rm = TRUE))  %>%  filter(Entity != "World" ) %>% 
+  filter(Entity != "Former U.S.S.R.")
+
+
+
 ```
 
 
@@ -92,7 +98,7 @@ data_prod_oil <- data1 %>%
 
 
 
-#### Top 10 oil producers of the world
+## Top 10 oil producers of the world and their percentage with respect to the total world production
 
 ```{r tbl-oilprod}
 
@@ -102,6 +108,7 @@ data_prod_oil <- data1 %>%
 
 data_prod_oil2 <- data_prod_oil %>% 
   mutate("Average oil production(in Million m^3)" = avg_oil/1000000) %>% 
+  mutate("Percentage"= round((avg_oil/sum(data2$avg_oil, na.rm = TRUE))*100,2)) %>% 
   select(-avg_oil) %>%
   kable(caption = "Top 10 Oil producers of the world") %>%
   kable_material_dark()
@@ -109,7 +116,7 @@ data_prod_oil2 <- data_prod_oil %>%
 data_prod_oil2
 ```
 
-
+We can see that Russia and Saudi Arabia produce about 12.75 and 12.24 percent respectively of the total world production.
 
 
 
@@ -124,7 +131,7 @@ data_prod_gas <- data1 %>%
 ```
 
 
-## Top 10 Natural Gas producers of the world
+## Top 10 Natural Gas producers of the world and their percentage with respect to the total world production
 
 ```{r tbl-gasprod}
 
@@ -135,6 +142,7 @@ data_prod_gas <- data1 %>%
 
 data_prod_gas2 <- data_prod_gas %>% 
   mutate("Average gas production(in Billion m^3)" = round(avg_gas/1000000000,2)) %>% 
+   mutate("Percentage"= round((avg_gas/sum(data2$avg_gas, na.rm = TRUE))*100,2)) %>% 
   select(-avg_gas) %>%  kable(caption = "Top 10 Natural Gas producers of the world")  %>%
   kable_material_dark()
 data_prod_gas2
@@ -145,7 +153,7 @@ data_prod_gas2
 ```
 
 
-
+Russia and USA are the top natural gas producers of the world with about 22.75 and 22.15 percent respectively of the total world production.
 
 
 
@@ -163,7 +171,7 @@ data_prod_coal <- data1 %>%
 
 
 
-
+## Top 10 Coal producers of the world and their percentage with respect to the total world production
 
 ```{r tbl-coalprod}
 
@@ -174,12 +182,14 @@ data_prod_coal <- data1 %>%
 
 data_prod_coal2 <- data_prod_coal %>% 
   mutate("Average coal production(in Million Tonnes)" = avg_coal/1000000) %>% 
+  mutate("Percentage"= round((avg_coal/sum(data2$avg_coal, na.rm = TRUE))*100,2)) %>% 
   select(-avg_coal) %>% 
   kable(caption = "Top 10 coal producers of the world")  %>%
   kable_material_dark()
 
 data_prod_coal2
 ```
+China is world's largest coal producer with around 32.81 percent of coal production coming from there followed by USA.
 
 
 
@@ -355,7 +365,8 @@ From the above graph @fig-coal , it is clearly evident that the production of co
 
 ## CONCLUSION
 
-With this blog, we were able to find the top oil @tbl-oilprod, gas  @tbl-gasprod and coal  @tbl-coalprod producers of the world and we were also able to find that which countries have the highest proven resources of a given fossil fuel.
+With this blog, we were able to find the top oil @tbl-oilprod, gas  @tbl-gasprod and coal  @tbl-coalprod producers of the world and we were also able to find that which countries have the highest proven resources of a given fossil fuel. 
+
 
 From the above graph of different resources, it is evident that the countries which have higher amount of a particular fossil fuel, is usually a higher producer of the particular resource with few exceptions.
 But, we just cant take into account this one factor. There are many other factors that are needed to be taken into account like the import and export , consumption of the resource and many countries are bound by contracts (OPEC) which limits them to how much resource they can produce, this is done to maintain the prices of the comodity in the international market.
@@ -380,8 +391,6 @@ Fossil Fuels Data Explorer. from Our World in Data website: https://ourworldinda
 
   Yihui Xie (2016). bookdown: Authoring Books and Technical Documents with R Markdown. Chapman and Hall/CRC. ISBN 978-1138700109.
   
-
-
 
 
 

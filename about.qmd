@@ -1,13 +1,16 @@
 ---
 title: "About"
-image: profile.jpg
+image: logo.png
 about:
   template: jolla
   links:
     - icon: github
       text: Github
       href: https://github.com/kvatsal2000
+    - icon: linkedin
+      text: linkedin
+      href: https://www.linkedin.com/in/kumar-vatsal-9a2b8a179/
 
 ---
 
-This is a blog template for the ETC5523 Communicating with Data assessment at Monash University.
+This blog, titled "blog on fossil fuels" is created for the ETC5523 Communicating with Data assessment by Kumar Vatsal at Monash University.

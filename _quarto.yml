@@ -2,12 +2,14 @@ project:
   type: website
 
 website:
-  title: "blog on fossil fuels"
+  title: "Blog on fossil fuels"
   navbar:
     right:
       - about.qmd
       - icon: github
         href: https://github.com/kvatsal2000
+      - icon: linkedin
+        href: https://www.linkedin.com/in/kumar-vatsal-9a2b8a179/
 format:
   html:
     theme: slate
