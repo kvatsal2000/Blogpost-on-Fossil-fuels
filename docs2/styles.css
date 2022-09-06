@@ -1,0 +1,17 @@
+/* css styles */
+.navbar-dark, .quarto-title-banner {
+  background-color: #006DAE;
+}
+
+
+
+
+body {
+  color: white;
+}
+
+
+h2 {
+  text-decoration-line: underline;
+  font-weight: bold
+}
